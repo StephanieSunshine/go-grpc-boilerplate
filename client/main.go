@@ -11,15 +11,16 @@ func main() {
   var conn *grpc.ClientConn
 
   conn, err := grpc.Dial(":7777", grpc.WithInsecure())
-  
+
   if err != nil {
     log.Fatalf("did not connect: %s", err)
   }
 
-  defer conn.Close()  
+  defer conn.Close()
 
-  c := api.NewPingClient(conn)  response, err := c.SayHello(context.Background(), &api.PingMessage{Greeting: "foo"})
-  
+  c := api.NewPingClient(conn)
+  response, err := c.SayHello(context.Background(), &api.PingMessage{Greeting: "foo"})
+
   if err != nil {
     log.Fatalf("Error when calling SayHello: %s", err)
   }
